@@ -1,0 +1,625 @@
+> df1=data.frame(Name=c('James','Paul','Richards','Marico','Samantha','Ravi','Raghu',
++                       'Richards','George','Ema','Samantha','Catherine'),
++                State=c('Alaska','California','Texas','North Carolina','California','Texas',
++                        'Alaska','Texas','North Carolina','Alaska','California','Texas'),
++                Sales=c(14,24,31,12,13,7,9,31,18,16,18,14))
+> aggregate(df1$Sales, by=list(df1$State), FUN=sum)
+         Group.1  x
+1         Alaska 39
+2     California 55
+3 North Carolina 30
+4          Texas 83
+> library(dplyr)
+> df1 %>% group_by(State) %>% summarise(sum_sales = sum(Sales))
+# A tibble: 4 x 2
+  State          sum_sales
+  <fct>              <dbl>
+1 Alaska                39
+2 California            55
+3 North Carolina        30
+4 Texas                 83
+> df = read.csv('C:\\Users\\gog90\\Downloads\\WorldCupMatches.csv')
+> df.info()
+Error in df.info() : could not find function "df.info"
+> df.head()
+Error in df.head() : could not find function "df.head"
+> dim(df)
+[1] 852  20
+> head(df)
+  Year             Datetime   Stage
+1 1930 13 Jul 1930 - 15:00  Group 1
+2 1930 13 Jul 1930 - 15:00  Group 4
+3 1930 14 Jul 1930 - 12:45  Group 2
+4 1930 14 Jul 1930 - 14:50  Group 3
+5 1930 15 Jul 1930 - 16:00  Group 1
+6 1930 16 Jul 1930 - 14:45  Group 1
+         Stadium        City Home.Team.Name
+1        Pocitos Montevideo          France
+2 Parque Central Montevideo             USA
+3 Parque Central Montevideo      Yugoslavia
+4        Pocitos Montevideo         Romania
+5 Parque Central Montevideo       Argentina
+6 Parque Central Montevideo           Chile
+  Home.Team.Goals Away.Team.Goals
+1               4               1
+2               3               0
+3               2               1
+4               3               1
+5               1               0
+6               3               0
+  Away.Team.Name Win.conditions Attendance
+1         Mexico                      4444
+2        Belgium                     18346
+3         Brazil                     24059
+4           Peru                      2549
+5         France                     23409
+6         Mexico                      9249
+  Half.time.Home.Goals Half.time.Away.Goals
+1                    3                    0
+2                    2                    0
+3                    2                    0
+4                    1                    0
+5                    0                    0
+6                    1                    0
+                 Referee
+1 LOMBARDI Domingo (URU)
+2      MACIAS Jose (ARG)
+3    TEJADA Anibal (URU)
+4  WARNKEN Alberto (CHI)
+5    REGO Gilberto (BRA)
+6  CRISTOPHE Henry (BEL)
+               Assistant.1
+1    CRISTOPHE Henry (BEL)
+2 MATEUCCI Francisco (URU)
+3  VALLARINO Ricardo (URU)
+4      LANGENUS Jean (BEL)
+5     SAUCEDO Ulises (BOL)
+6  APHESTEGUY Martin (URU)
+                 Assistant.2 RoundID MatchID
+1        REGO Gilberto (BRA)     201    1096
+2      WARNKEN Alberto (CHI)     201    1090
+3        BALWAY Thomas (FRA)     201    1093
+4   MATEUCCI Francisco (URU)     201    1098
+5 RADULESCU Constantin (ROU)     201    1085
+6        LANGENUS Jean (BEL)     201    1095
+  Home.Team.Initials Away.Team.Initials
+1                FRA                MEX
+2                USA                BEL
+3                YUG                BRA
+4                ROU                PER
+5                ARG                FRA
+6                CHI                MEX
+> WorldCupMatches_distinct <- WorldCupMatches %>%  distinct()
+Error in distinct(.) : object 'WorldCupMatches' not found
+> WorldCupMatches_distinct
+Error: object 'WorldCupMatches_distinct' not found
+> 
+> WorldCupMatches_distinct <- WorldCupMatches %>%  distinct()
+Error in distinct(.) : object 'WorldCupMatches' not found
+> 
+> summary(df)
+      Year                      Datetime              Stage                          Stadium                 City    
+ Min.   :1930   27 May 1934 - 16:30 :  8   Round of 16   : 72   Estadio Azteca           : 19   Mexico City    : 23  
+ 1st Qu.:1970   08 Jun 1958 - 19:00 :  7   Quarter-finals: 66   Jalisco                  : 14   Montevideo     : 18  
+ Median :1990   11 Jun 1958 - 19:00 :  7   Group 1       : 62   Olympiastadion           : 14   Rio De Janeiro : 18  
+ Mean   :1985   15 Jun 1958 - 19:00 :  7   Group A       : 60   Nou Camp - Estadio Leï¿½n: 11   Guadalajara    : 17  
+ 3rd Qu.:2002   02 Jul 1950 - 15:00 :  4   Group B       : 60   Estadio Centenario       : 10   Johannesburg   : 15  
+ Max.   :2014   02 Jun 1962 - 15:00 :  4   Group 2       : 59   Estadio do Maracana      : 10   Sao Paulo      : 14  
+                (Other)             :815   (Other)       :473   (Other)                  :774   (Other)        :747  
+    Home.Team.Name Home.Team.Goals  Away.Team.Goals   Away.Team.Name                          Win.conditions
+ Brazil    : 82    Min.   : 0.000   Min.   :0.000   Mexico   : 38                                    :787   
+ Italy     : 57    1st Qu.: 1.000   1st Qu.:0.000   France   : 30    Italy win after extra time      :  5   
+ Argentina : 54    Median : 2.000   Median :1.000   Spain    : 29    Argentina win after extra time  :  4   
+ Germany FR: 43    Mean   : 1.811   Mean   :1.022   Argentina: 27    Germany win after extra time    :  4   
+ England   : 35    3rd Qu.: 3.000   3rd Qu.:2.000   England  : 27    Belgium win after extra time    :  3   
+ Germany   : 34    Max.   :10.000   Max.   :7.000   Brazil   : 26    Brazil win on penalties (3 - 2) :  3   
+ (Other)   :547                                     (Other)  :675    (Other)                         : 46   
+   Attendance     Half.time.Home.Goals Half.time.Away.Goals                   Referee   
+ Min.   :  2000   Min.   :0.0000       Min.   :0.0000       Ravshan IRMATOV (UZB) : 10  
+ 1st Qu.: 30000   1st Qu.:0.0000       1st Qu.:0.0000       ARCHUNDIA Benito (MEX):  8  
+ Median : 41580   Median :0.0000       Median :0.0000       LARRIONDA Jorge (URU) :  8  
+ Mean   : 45165   Mean   :0.7089       Mean   :0.4284       QUINIOU Joel (FRA)    :  8  
+ 3rd Qu.: 61375   3rd Qu.:1.0000       3rd Qu.:1.0000       RODRIGUEZ Marco (MEX) :  8  
+ Max.   :173850   Max.   :6.0000       Max.   :5.0000       BUJSAIM Ali (UAE)     :  7  
+ NA's   :2                                                  (Other)               :803  
+                           Assistant.1                    Assistant.2     RoundID            MatchID         
+ ACHIK Redouane (MAR)            :  7   KOCHKAROV Bakhadyr (KGZ): 10   Min.   :     201   Min.   :       25  
+ BERANEK Alois (AUT)             :  7   LISTKIEWICZ Michal (POL):  7   1st Qu.:     262   1st Qu.:     1189  
+ GONZALEZ ARCHUNDIA Alfonso (MEX):  7   VERGARA Hector (CAN)    :  7   Median :     337   Median :     2191  
+ HERMANS Peter (BEL)             :  7   VROMANS Walter (BEL)    :  7   Mean   :10661773   Mean   : 61346868  
+ VERGARA Hector (CAN)            :  7   YUSTE Juan (ESP)        :  7   3rd Qu.:  249722   3rd Qu.: 43950059  
+ FREDRIKSSON Erik (SWE)          :  6   AMLER Evzen (CZE)       :  6   Max.   :97410600   Max.   :300186515  
+ (Other)                         :811   (Other)                 :808                                         
+ Home.Team.Initials Away.Team.Initials
+ BRA    : 82        MEX    : 38       
+ ITA    : 57        FRA    : 30       
+ ARG    : 54        ESP    : 29       
+ FRG    : 43        ARG    : 27       
+ ENG    : 35        ENG    : 27       
+ GER    : 34        BRA    : 26       
+ (Other):547        (Other):675       
+> length(unique(df$City))
+[1] 151
+> mean(df$Attendance)
+[1] NA
+> aggregate(df$Home.Team.Goals , by=list(df$Home.Team.Goals), FUN=sum)
+   Group.1   x
+1        0   0
+2        1 246
+3        2 410
+4        3 348
+5        4 236
+6        5  85
+7        6 102
+8        7  56
+9        8  32
+10       9  18
+11      10  10
+> aggregate(df$Home.Team.Goals , by=list(df$Home.Team.Name), FUN=sum)
+                      Group.1   x
+1                     Algeria   5
+2                      Angola   0
+3                   Argentina 111
+4                   Australia   7
+5                     Austria  31
+6                     Belgium  27
+7                     Bolivia   1
+8                      Brazil 180
+9                    Bulgaria  11
+10                   Cameroon  11
+11                     Canada   0
+12                      Chile  25
+13                   China PR   0
+14            Cï¿½te d'Ivoire   5
+15                   Colombia  11
+16                 Costa Rica   7
+17                    Croatia   3
+18                       Cuba   5
+19             Czech Republic   0
+20             Czechoslovakia  27
+21                    Denmark  13
+22                    Ecuador   4
+23                    England  54
+24                     France  68
+25                  German DR   3
+26                    Germany  69
+27                 Germany FR  99
+28                      Ghana   4
+29                     Greece   4
+30                      Haiti   0
+31                   Honduras   2
+32                    Hungary  73
+33                    IR Iran   0
+34                       Iran   1
+35                       Iraq   1
+36                      Italy  99
+37                    Jamaica   1
+38                      Japan   7
+39                  Korea DPR   2
+40             Korea Republic  18
+41                     Mexico  22
+42                    Morocco   3
+43                Netherlands  51
+44                New Zealand   1
+45                    Nigeria  12
+46           Northern Ireland   5
+47                     Norway   1
+48                   Paraguay  14
+49                       Peru  13
+50                     Poland  27
+51                   Portugal  36
+52 rn">Bosnia and Herzegovina   3
+53    rn">Republic of Ireland   2
+54  rn">Serbia and Montenegro   0
+55    rn">Trinidad and Tobago   0
+56   rn">United Arab Emirates   0
+57                    Romania  15
+58                     Russia   9
+59               Saudi Arabia   3
+60                   Scotland  11
+61                    Senegal   3
+62                     Serbia   0
+63                   Slovakia   3
+64                   Slovenia   3
+65               South Africa   7
+66               Soviet Union  43
+67                      Spain  50
+68                     Sweden  53
+69                Switzerland  22
+70                       Togo   0
+71                    Tunisia   6
+72                     Turkey  10
+73                    Ukraine   1
+74                    Uruguay  62
+75                        USA  19
+76                      Wales   2
+77                 Yugoslavia  42
+78                      Zaire   0
+> mean(df$Attendance($year))
+Error: unexpected '$' in "mean(df$Attendance($"
+> aggregate(df$Attendance , by=list(df$Year), FUN=mean)
+   Group.1        x
+1     1930 32808.28
+2     1934 21352.94
+3     1938 20872.22
+4     1950 47511.18
+5     1954 29561.81
+6     1958 23423.14
+7     1962 27911.62
+8     1966 48847.97
+9     1970 50124.22
+10    1974 49098.76
+11    1978 40678.71
+12    1982 40571.60
+13    1986 46039.06
+14    1990 48388.75
+15    1994 68991.12
+16    1998 43517.19
+17    2002 42268.70
+18    2006 52491.23
+19    2010 49669.62
+20    2014       NA
+> 
+> df = read.csv('C:\\Users\\gog90\\Downloads\\metabolite.csv')
+> dim(df)
+[1]  69 192
+> 
+> 
+> sum(is.na(combine))
+[1] 0
+Warning message:
+In is.na(combine) :
+  is.na() applied to non-(list or vector) of type 'closure'
+> sum(is.na(df))
+[1] 432
+> df[is.na(df$Dopamine)==FALSE,]
+      Label  Phe Pro Ser Thr ADMA alpha.AAA c4.OH.Pro Carnosine Creatinine  DOPA Dopamine Histamine Kynurenine Met.SO
+1 Alzheimer 72.8 166 170 282 1.15     0.760     0.236     1.270       49.9 0.265    0.233     0.225       5.21  0.526
+4 Alzheimer 94.1 129 162 201 1.10     0.795        NA     0.675       80.1 0.264    0.234     0.209       5.80  0.389
+5 Alzheimer 79.8 126 115 199 1.24     1.360        NA     1.280       60.5 0.271    0.231     0.210       4.46  0.466
+8   Healthy 83.6 119 135 268 1.18     0.779     0.215     0.647       30.6 0.275    0.244     0.214       5.66  0.245
+9   Healthy 73.7 124 145 307 1.17     0.785     0.186     0.590       39.8 0.259    0.233     0.210       6.36  0.413
+  Nitro.Tyr PEA Putrescine Sarcosine Serotonin Spermidine Spermine t4.OH.Pro Taurine SDMA   C0   C10 C10.1 C10.2
+1     0.027  NA      0.068      17.8     0.147      0.188       NA      24.0     125 1.13 18.2 0.059 0.312 0.038
+4        NA  NA      0.110      18.7     0.255      0.353       NA      23.1     159 1.34 23.5 0.071 0.317 0.040
+5        NA  NA      0.118      22.5     0.390      0.473       NA      26.9     149 1.24 13.6 0.139 0.472 0.074
+8     0.002  NA      0.161      23.3     0.215      0.276       NA      10.7     133 1.04 13.3 0.051 0.217 0.030
+9        NA  NA      0.121      22.1     0.166      0.327       NA      16.0     215 1.24 15.8 0.061 0.258 0.036
+    C12 C12.DC C12.1   C14 C14.1 C14.1.OH C14.2 C14.2.OH   C16 C16.OH C16.1 C16.1.OH C16.2 C16.2.OH   C18 C18.1
+1 0.030  0.042 0.290 0.023 0.019    0.008 0.008    0.006 0.046  0.008 0.009    0.007 0.005    0.013 0.013 0.024
+4 0.045  0.048 0.275 0.026 0.028    0.010 0.013    0.011 0.074  0.011 0.015    0.008 0.006    0.009 0.020 0.035
+5 0.056  0.079 0.394 0.034 0.043    0.016 0.025    0.017 0.062     NA 0.024    0.014 0.012    0.025 0.031 0.034
+8 0.041  0.035 0.174 0.024 0.017    0.007 0.006    0.007 0.060  0.006 0.010    0.005 0.004    0.008 0.020 0.025
+9 0.037  0.038 0.228 0.022 0.018    0.007 0.007    0.007 0.054  0.005 0.012    0.005 0.005    0.009 0.014 0.026
+  C18.1.OH C18.2   C2    C3 C3.OH  C3.1    C4 C3.DC..C4.OH.  C4.1    C5 C5.M.DC C5.OH..C3.DC.M.  C5.1 C5.1.DC
+1    0.003 0.016 1.97 0.354 0.008 0.015 0.082         0.045 0.025 0.094   0.023           0.026 0.030   0.020
+4    0.004 0.033 2.10 0.278 0.010 0.017 0.110         0.077 0.031 0.145   0.034           0.041 0.035   0.016
+5    0.012 0.017 5.62 0.436 0.029 0.035 0.106         0.099 0.069 0.141   0.094           0.058 0.073   0.049
+8    0.004 0.019 1.66 0.258 0.008 0.012 0.082         0.047 0.021 0.107   0.023           0.023 0.021   0.017
+9    0.003 0.016 2.21 0.233 0.008 0.014 0.088         0.029 0.024 0.127   0.024           0.024 0.025   0.016
+  C6..C4.1.DC. C5.DC..C6.OH.  C6.1 C7.DC    C8    C9 lysoPC.a.C14.0 lysoPC.a.C16.0 lysoPC.a.C16.1 lysoPC.a.C17.0
+1        0.022         0.014 0.018 0.011 0.062 0.016           2.23           37.9           2.66          0.446
+4        0.029         0.016 0.027 0.017 0.091 0.018           2.19           32.8           2.39          0.323
+5        0.052         0.040 0.040 0.036 0.192 0.041           1.88           24.5           1.27          0.382
+8        0.036         0.011    NA 0.009 0.062 0.011           2.13           33.7           3.09          0.455
+9        0.026         0.018 0.015 0.013 0.064 0.014           2.10           36.0           3.46          0.435
+  lysoPC.a.C18.0 lysoPC.a.C18.1 lysoPC.a.C18.2 lysoPC.a.C20.3 lysoPC.a.C20.4 lysoPC.a.C24.0 lysoPC.a.C26.0
+1           9.00           8.58           7.27           1.83           8.25          0.079          0.113
+4           7.21           7.22           7.62           1.64           6.75          0.066          0.086
+5           6.66           5.39           3.60           0.97           6.26          0.084          0.118
+8           6.96           7.31           7.53           2.35           8.73          0.061          0.083
+9           7.27           8.11           6.75           2.08           7.82          0.068          0.083
+  lysoPC.a.C26.1 lysoPC.a.C28.0 lysoPC.a.C28.1 PC.aa.C24.0 PC.aa.C26.0 PC.aa.C28.1 PC.aa.C30.0 PC.aa.C32.0
+1          0.053          0.108          0.072       0.082       0.438       0.571        2.35        11.4
+4          0.045          0.076          0.076       0.076       0.486       0.685        3.33        18.6
+5          0.053          0.092          0.072       0.069       0.401       0.513        1.78        13.8
+8          0.047          0.124          0.078       0.082       0.424       0.605        2.32        12.1
+9          0.037          0.096          0.061       0.064       0.430       0.486        2.05        10.4
+  PC.aa.C32.1 PC.aa.C32.2 PC.aa.C32.3 PC.aa.C34.1 PC.aa.C34.2 PC.aa.C34.3 PC.aa.C34.4 PC.aa.C36.0 PC.aa.C36.1
+1        9.22          NA       0.092       109.0        71.0       1.430       0.200        2.38        21.7
+4       13.30       0.053       0.079       106.0        93.6       1.590       0.190        2.57        20.9
+5        5.03          NA       0.102        83.4        35.9       0.709       0.135        1.83        20.5
+8       11.50          NA       0.093        83.6        60.6       1.580       0.251        2.16        18.4
+9       11.40          NA       0.082        89.6        55.1       1.390       0.221        1.62        18.3
+  PC.aa.C36.2 PC.aa.C36.3 PC.aa.C36.4 PC.aa.C36.5 PC.aa.C36.6 PC.aa.C38.0 PC.aa.C38.3 PC.aa.C38.4 PC.aa.C38.5
+1        42.4        42.7       120.0        1.86       0.084       1.230        32.1        95.1        16.8
+4        48.8        41.2       122.0        1.76       0.070       1.160        28.7        92.7        14.3
+5        28.5        21.9        98.1        1.70       0.048       1.100        23.3       101.0        13.8
+8        34.4        41.5       110.0        2.03       0.106       1.150        31.3        81.7        14.5
+9        32.0        41.8       102.0        1.77       0.081       0.902        31.1        75.9        13.6
+  PC.aa.C38.6 PC.aa.C40.1 PC.aa.C40.2 PC.aa.C40.3 PC.aa.C40.4 PC.aa.C40.5 PC.aa.C40.6 PC.aa.C42.0 PC.aa.C42.1
+1        41.6       0.195       0.074       0.491        3.48        5.66        21.8       0.364       0.226
+4        29.9       0.220       0.097       0.433        3.59        5.06        14.0       0.427       0.223
+5        36.2       0.165       0.044       0.525        3.37        5.29        22.5       0.125       0.095
+8        42.8       0.225       0.099       0.384        4.02        5.49        20.6       0.365       0.193
+9        37.6       0.181       0.100       0.298        2.88        4.88        17.5       0.396       0.216
+  PC.aa.C42.2 PC.aa.C42.4 PC.aa.C42.5 PC.aa.C42.6 PC.ae.C30.0 PC.ae.C30.1 PC.ae.C30.2 PC.ae.C32.1 PC.ae.C32.2
+1       0.108       0.272       0.272       0.291       0.173       0.027       0.022        1.65       0.371
+4       0.119       0.268       0.267       0.254       0.223       0.049       0.023        2.47       0.459
+5       0.083       0.206       0.205       0.280       0.095       0.082       0.023        1.72       0.316
+8       0.089       0.266       0.237       0.288       0.212       0.028       0.033        1.68       0.335
+9       0.086       0.215       0.206       0.223       0.179       0.012       0.022        1.53       0.291
+  PC.ae.C34.0 PC.ae.C34.1 PC.ae.C34.2 PC.ae.C34.3 PC.ae.C36.0 PC.ae.C36.1 PC.ae.C36.2 PC.ae.C36.3 PC.ae.C36.4
+1       0.880        3.66        2.48       0.813       0.498        5.64        1.90        1.17        6.96
+4       0.964        4.06        3.09       1.020       0.552        4.75        2.01        1.35        8.36
+5       1.060        3.28        1.70       0.722       0.553        5.95        1.47        0.76        4.78
+8       1.140        3.51        2.28       0.868       0.479        5.65        1.97        1.25        7.15
+9       0.683        3.20        2.03       0.663       0.384        4.79        1.54        1.12        6.43
+  PC.ae.C36.5 PC.ae.C38.0 PC.ae.C38.1 PC.ae.C38.2 PC.ae.C38.3 PC.ae.C38.4 PC.ae.C38.5 PC.ae.C38.6 PC.ae.C40.1
+1        4.79       0.474       0.287       0.538        2.66        6.33        5.51        1.95       0.574
+4        5.97       0.397       0.022       0.144        1.97        5.99        5.63        1.97       0.425
+5        4.00       0.430       0.271       0.246        1.80        5.45        4.34        1.51       0.430
+8        4.04       0.550       0.078       0.559        2.90        5.73        4.53        1.71       0.584
+9        3.32       0.442          NA       0.224        2.53        5.03        3.82        1.28       0.472
+  PC.ae.C40.2 PC.ae.C40.3 PC.ae.C40.4 PC.ae.C40.5 PC.ae.C40.6 PC.ae.C42.0 PC.ae.C42.1 PC.ae.C42.2 PC.ae.C42.3
+1       0.575       0.940        1.76        1.77        1.59       0.629       0.316       0.192       0.277
+4       0.540       0.742        1.45        1.62        1.25       0.637       0.299       0.159       0.208
+5       0.432       0.632        1.10        1.25        1.47       0.660       0.355       0.138       0.174
+8       0.499       0.991        1.84        1.53        1.46       0.631       0.271       0.186       0.282
+9       0.555       0.737        1.35        1.34        1.21       0.645       0.264       0.168       0.229
+  PC.ae.C42.4 PC.ae.C42.5 PC.ae.C44.3 PC.ae.C44.4 PC.ae.C44.5 PC.ae.C44.6 SM..OH..C14.1 SM..OH..C16.1 SM..OH..C22.1
+1       0.264       0.888       0.065       0.168       0.536       0.494         1.420         1.330          2.07
+4       0.392       0.863       0.069       0.237       0.517       0.611         1.720         1.480          2.97
+5       0.162       0.513       0.081       0.154       0.178       0.134         0.987         1.480          1.96
+8       0.333       0.861       0.085       0.183       0.534       0.429         1.500         1.160          2.98
+9       0.319       0.925       0.069       0.184       0.671       0.460         1.230         0.984          2.21
+  SM..OH..C22.2 SM..OH..C24.1 SM.C16.0 SM.C16.1 SM.C18.0 SM.C18.1 SM.C20.2 SM.C24.0 SM.C24.1 SM.C26.0 SM.C26.1 H1_1
+1          1.86         0.597     44.9     7.99     14.5    10.40    0.290    12.20     27.3    0.147    0.337 3356
+4          2.84         0.682     52.4     8.61     17.2    11.50    0.261    11.80     27.9    0.138    0.353 2652
+5          1.74         0.478     40.6     5.86     13.0     8.34    0.196     9.29     20.5    0.111    0.283 2258
+8          2.59         0.631     37.9     7.92     11.9     9.59    0.199     9.36     18.8    0.117    0.227 2464
+9          2.07         0.507     37.3     6.65     12.0     8.48    0.183    10.30     23.6    0.090    0.268 2725
+    H1 Urea_N L.Arginine_N L.Leucine_N EDTAca_N X2.Hydroxybutyrate X3.Hydroxybutyrate Acetate Acetoacetate Acetone
+1 3356     NA           NA          NA       NA                 NA                 NA      NA           NA      NA
+4 2652  500.8         16.0        27.1      2.5               12.7                7.2     9.8          4.8     4.0
+5 2258  132.5         13.2        57.9      2.5               35.2               44.7    20.2         18.9    18.9
+8 2464  182.3         49.8        63.9      0.0               21.7               20.9    19.5         15.4     6.6
+9 2725  255.8         39.0        64.6      2.7               17.1               37.9    20.0         22.0     9.3
+  Betaine Carnitine Choline Creatine Dimethyl.sulfone Ethanol Formate Glucose Glycerol Hypoxanthine Isobutyrate
+1      NA        NA      NA       NA               NA      NA      NA      NA       NA           NA          NA
+4    13.9       7.7    11.8     14.7              1.3     6.4    14.4   629.5    322.0          8.6         2.5
+5    33.9      18.5    27.7     35.4              5.5    13.0    40.0  1618.0    271.6          0.0         6.1
+8    35.3      13.0    21.5     25.9              5.4    10.2    23.2  2120.5    406.5          5.8         4.5
+9    12.0      14.4    15.4     25.3              3.5     5.1    25.0  1644.2    479.9          5.6         5.9
+  Isopropanol Lactate Malonate
+1          NA      NA       NA
+4         4.4  1037.7      7.6
+5        11.2  2199.9     11.7
+8         4.4  1661.4     11.0
+9         6.7  2048.5      8.0
+ [ reached 'max' / getOption("max.print") -- omitted 44 rows ]
+> df[data$label=='Alzheimer',]
+Error in data$label : object of type 'closure' is not subsettable
+> df[df$Label=='Alzheimer',]
+      Label  Phe Pro Ser Thr ADMA alpha.AAA c4.OH.Pro Carnosine Creatinine  DOPA Dopamine Histamine Kynurenine Met.SO
+1 Alzheimer 72.8 166 170 282 1.15     0.760     0.236     1.270       49.9 0.265    0.233     0.225       5.21  0.526
+2 Alzheimer 93.4 138 142 217 1.05     0.929     0.189     1.350       48.8 0.252       NA     0.211       5.44  0.387
+3 Alzheimer 68.6 161 158 208 1.00     0.620     0.198     0.998       30.4 0.268       NA     0.217       5.20  0.651
+4 Alzheimer 94.1 129 162 201 1.10     0.795        NA     0.675       80.1 0.264    0.234     0.209       5.80  0.389
+5 Alzheimer 79.8 126 115 199 1.24     1.360        NA     1.280       60.5 0.271    0.231     0.210       4.46  0.466
+  Nitro.Tyr PEA Putrescine Sarcosine Serotonin Spermidine Spermine t4.OH.Pro Taurine SDMA   C0   C10 C10.1 C10.2
+1     0.027  NA      0.068      17.8     0.147      0.188       NA      24.0     125 1.13 18.2 0.059 0.312 0.038
+2        NA  NA      0.087      20.2     0.231      0.233       NA      29.3     120 1.65 17.0 0.051 0.288 0.039
+3        NA  NA      0.260      14.4     0.196      0.384       NA      20.9     139 1.57 12.6 0.083 0.357 0.054
+4        NA  NA      0.110      18.7     0.255      0.353       NA      23.1     159 1.34 23.5 0.071 0.317 0.040
+5        NA  NA      0.118      22.5     0.390      0.473       NA      26.9     149 1.24 13.6 0.139 0.472 0.074
+    C12 C12.DC C12.1   C14 C14.1 C14.1.OH C14.2 C14.2.OH   C16 C16.OH C16.1 C16.1.OH C16.2 C16.2.OH   C18 C18.1
+1 0.030  0.042 0.290 0.023 0.019    0.008 0.008    0.006 0.046  0.008 0.009    0.007 0.005    0.013 0.013 0.024
+2 0.038  0.038 0.265 0.026 0.017    0.008 0.009    0.009 0.070  0.009 0.013    0.006 0.006    0.012 0.014 0.025
+3 0.032  0.048 0.302 0.021 0.031    0.010 0.010    0.009 0.076  0.011 0.019    0.010 0.005    0.013 0.016 0.025
+4 0.045  0.048 0.275 0.026 0.028    0.010 0.013    0.011 0.074  0.011 0.015    0.008 0.006    0.009 0.020 0.035
+5 0.056  0.079 0.394 0.034 0.043    0.016 0.025    0.017 0.062     NA 0.024    0.014 0.012    0.025 0.031 0.034
+  C18.1.OH C18.2   C2    C3 C3.OH  C3.1    C4 C3.DC..C4.OH.  C4.1    C5 C5.M.DC C5.OH..C3.DC.M.  C5.1 C5.1.DC
+1    0.003 0.016 1.97 0.354 0.008 0.015 0.082         0.045 0.025 0.094   0.023           0.026 0.030   0.020
+2    0.003 0.028 1.95 0.184 0.009 0.013 0.108         0.080 0.025 0.077   0.032           0.026 0.024   0.021
+3       NA 0.018 1.70 0.371    NA 0.012 0.057         0.035 0.039 0.096   0.045           0.024 0.037   0.018
+4    0.004 0.033 2.10 0.278 0.010 0.017 0.110         0.077 0.031 0.145   0.034           0.041 0.035   0.016
+5    0.012 0.017 5.62 0.436 0.029 0.035 0.106         0.099 0.069 0.141   0.094           0.058 0.073   0.049
+  C6..C4.1.DC. C5.DC..C6.OH.  C6.1 C7.DC    C8    C9 lysoPC.a.C14.0 lysoPC.a.C16.0 lysoPC.a.C16.1 lysoPC.a.C17.0
+1        0.022         0.014 0.018 0.011 0.062 0.016           2.23           37.9           2.66          0.446
+2        0.030         0.018 0.015 0.010 0.058 0.014           1.97           22.1           1.31          0.270
+3        0.022         0.029 0.031 0.021 0.090 0.017           2.12           33.7           2.53          0.399
+4        0.029         0.016 0.027 0.017 0.091 0.018           2.19           32.8           2.39          0.323
+5        0.052         0.040 0.040 0.036 0.192 0.041           1.88           24.5           1.27          0.382
+  lysoPC.a.C18.0 lysoPC.a.C18.1 lysoPC.a.C18.2 lysoPC.a.C20.3 lysoPC.a.C20.4 lysoPC.a.C24.0 lysoPC.a.C26.0
+1           9.00           8.58           7.27          1.830           8.25          0.079          0.113
+2           5.35           3.94           4.42          0.958           4.60          0.059          0.066
+3           7.51           7.73           8.02          2.050           9.84          0.075          0.126
+4           7.21           7.22           7.62          1.640           6.75          0.066          0.086
+5           6.66           5.39           3.60          0.970           6.26          0.084          0.118
+  lysoPC.a.C26.1 lysoPC.a.C28.0 lysoPC.a.C28.1 PC.aa.C24.0 PC.aa.C26.0 PC.aa.C28.1 PC.aa.C30.0 PC.aa.C32.0
+1          0.053          0.108          0.072       0.082       0.438       0.571        2.35        11.4
+2          0.042          0.076          0.058       0.065       0.409       0.521        1.99        12.7
+3          0.049          0.078          0.092       0.099       0.458       0.605        2.69        16.6
+4          0.045          0.076          0.076       0.076       0.486       0.685        3.33        18.6
+5          0.053          0.092          0.072       0.069       0.401       0.513        1.78        13.8
+  PC.aa.C32.1 PC.aa.C32.2 PC.aa.C32.3 PC.aa.C34.1 PC.aa.C34.2 PC.aa.C34.3 PC.aa.C34.4 PC.aa.C36.0 PC.aa.C36.1
+1        9.22          NA       0.092       109.0        71.0       1.430       0.200        2.38        21.7
+2        5.40          NA       0.067        64.2        60.5       0.879       0.127        2.05        14.3
+3       11.60          NA       0.105       108.0        83.1       1.930       0.210        2.30        19.9
+4       13.30       0.053       0.079       106.0        93.6       1.590       0.190        2.57        20.9
+5        5.03          NA       0.102        83.4        35.9       0.709       0.135        1.83        20.5
+  PC.aa.C36.2 PC.aa.C36.3 PC.aa.C36.4 PC.aa.C36.5 PC.aa.C36.6 PC.aa.C38.0 PC.aa.C38.3 PC.aa.C38.4 PC.aa.C38.5
+1        42.4        42.7       120.0        1.86       0.084       1.230        32.1        95.1       16.80
+2        35.6        24.3        83.7        1.05       0.046       0.946        21.9        78.9        9.91
+3        44.9        43.9       146.0        2.09       0.057       1.210        34.5       107.0       17.50
+4        48.8        41.2       122.0        1.76       0.070       1.160        28.7        92.7       14.30
+5        28.5        21.9        98.1        1.70       0.048       1.100        23.3       101.0       13.80
+  PC.aa.C38.6 PC.aa.C40.1 PC.aa.C40.2 PC.aa.C40.3 PC.aa.C40.4 PC.aa.C40.5 PC.aa.C40.6 PC.aa.C42.0 PC.aa.C42.1
+1        41.6       0.195       0.074       0.491        3.48        5.66        21.8       0.364       0.226
+2        25.1       0.211       0.057       0.358        3.39        4.08        14.2       0.419       0.216
+3        36.6       0.212       0.118       0.395        3.56        5.34        16.7       0.476       0.281
+4        29.9       0.220       0.097       0.433        3.59        5.06        14.0       0.427       0.223
+5        36.2       0.165       0.044       0.525        3.37        5.29        22.5       0.125       0.095
+  PC.aa.C42.2 PC.aa.C42.4 PC.aa.C42.5 PC.aa.C42.6 PC.ae.C30.0 PC.ae.C30.1 PC.ae.C30.2 PC.ae.C32.1 PC.ae.C32.2
+1       0.108       0.272       0.272       0.291       0.173       0.027       0.022        1.65       0.371
+2       0.109       0.336       0.317       0.248       0.147       0.024       0.020        2.01       0.360
+3       0.118       0.300       0.206       0.267       0.209       0.046       0.030        2.40       0.477
+4       0.119       0.268       0.267       0.254       0.223       0.049       0.023        2.47       0.459
+5       0.083       0.206       0.205       0.280       0.095       0.082       0.023        1.72       0.316
+  PC.ae.C34.0 PC.ae.C34.1 PC.ae.C34.2 PC.ae.C34.3 PC.ae.C36.0 PC.ae.C36.1 PC.ae.C36.2 PC.ae.C36.3 PC.ae.C36.4
+1       0.880        3.66        2.48       0.813       0.498        5.64        1.90       1.170        6.96
+2       0.763        2.68        2.32       0.905       0.398        3.89        1.54       0.873        6.40
+3       0.938        4.04        2.95       1.030       0.554        5.95        2.29       1.240        9.05
+4       0.964        4.06        3.09       1.020       0.552        4.75        2.01       1.350        8.36
+5       1.060        3.28        1.70       0.722       0.553        5.95        1.47       0.760        4.78
+  PC.ae.C36.5 PC.ae.C38.0 PC.ae.C38.1 PC.ae.C38.2 PC.ae.C38.3 PC.ae.C38.4 PC.ae.C38.5 PC.ae.C38.6 PC.ae.C40.1
+1        4.79       0.474       0.287       0.538        2.66        6.33        5.51        1.95       0.574
+2        5.36       0.325          NA       0.127        1.80        5.37        4.49        1.63       0.281
+3        6.63       0.478       0.285       0.154        2.87        7.06        5.64        1.98       0.759
+4        5.97       0.397       0.022       0.144        1.97        5.99        5.63        1.97       0.425
+5        4.00       0.430       0.271       0.246        1.80        5.45        4.34        1.51       0.430
+  PC.ae.C40.2 PC.ae.C40.3 PC.ae.C40.4 PC.ae.C40.5 PC.ae.C40.6 PC.ae.C42.0 PC.ae.C42.1 PC.ae.C42.2 PC.ae.C42.3
+1       0.575       0.940        1.76        1.77        1.59       0.629       0.316       0.192       0.277
+2       0.491       0.702        1.43        1.55        1.20       0.616       0.260       0.157       0.200
+3       0.654       0.817        1.51        1.64        1.49       0.686       0.356       0.241       0.288
+4       0.540       0.742        1.45        1.62        1.25       0.637       0.299       0.159       0.208
+5       0.432       0.632        1.10        1.25        1.47       0.660       0.355       0.138       0.174
+  PC.ae.C42.4 PC.ae.C42.5 PC.ae.C44.3 PC.ae.C44.4 PC.ae.C44.5 PC.ae.C44.6 SM..OH..C14.1 SM..OH..C16.1 SM..OH..C22.1
+1       0.264       0.888       0.065       0.168       0.536       0.494         1.420          1.33          2.07
+2       0.311       0.840       0.071       0.220       0.470       0.515         1.390          1.25          2.47
+3       0.319       0.957       0.065       0.228       0.565       0.603         1.840          1.58          2.69
+4       0.392       0.863       0.069       0.237       0.517       0.611         1.720          1.48          2.97
+5       0.162       0.513       0.081       0.154       0.178       0.134         0.987          1.48          1.96
+  SM..OH..C22.2 SM..OH..C24.1 SM.C16.0 SM.C16.1 SM.C18.0 SM.C18.1 SM.C20.2 SM.C24.0 SM.C24.1 SM.C26.0 SM.C26.1 H1_1
+1          1.86         0.597     44.9     7.99     14.5    10.40    0.290    12.20     27.3    0.147    0.337 3356
+2          2.20         0.640     42.1     6.88     12.7     8.52    0.211    10.40     25.6    0.130    0.317 2509
+3          2.63         0.665     44.8     8.91     14.6    11.60    0.304    11.50     28.8    0.163    0.364 2661
+4          2.84         0.682     52.4     8.61     17.2    11.50    0.261    11.80     27.9    0.138    0.353 2652
+5          1.74         0.478     40.6     5.86     13.0     8.34    0.196     9.29     20.5    0.111    0.283 2258
+    H1 Urea_N L.Arginine_N L.Leucine_N EDTAca_N X2.Hydroxybutyrate X3.Hydroxybutyrate Acetate Acetoacetate Acetone
+1 3356     NA           NA          NA       NA                 NA                 NA      NA           NA      NA
+2 2509  201.9         22.5        35.3      2.0              12.40                8.5    13.2          5.7     5.1
+3 2661  193.3         21.0        25.4      1.8              11.33               11.7     5.8          9.3     5.6
+4 2652  500.8         16.0        27.1      2.5              12.70                7.2     9.8          4.8     4.0
+5 2258  132.5         13.2        57.9      2.5              35.20               44.7    20.2         18.9    18.9
+  Betaine Carnitine Choline Creatine Dimethyl.sulfone Ethanol Formate Glucose Glycerol Hypoxanthine Isobutyrate
+1      NA        NA      NA       NA               NA      NA      NA      NA       NA           NA          NA
+2    22.0       8.7    14.2     14.5              4.7    16.6    24.6  1489.7    324.6          6.3         3.6
+3    19.1      15.3    14.5     17.8              2.1     8.1    27.4  1343.9    201.3          6.0         2.5
+4    13.9       7.7    11.8     14.7              1.3     6.4    14.4   629.5    322.0          8.6         2.5
+5    33.9      18.5    27.7     35.4              5.5    13.0    40.0  1618.0    271.6          0.0         6.1
+  Isopropanol Lactate Malonate
+1          NA      NA       NA
+2         1.9  1171.6     10.4
+3         2.5  1938.1     13.1
+4         4.4  1037.7      7.6
+5        11.2  2199.9     11.7
+ [ reached 'max' / getOption("max.print") -- omitted 30 rows ]
+> df[is.na(df$c4.OH.Pro)] <- median(df$c4.OH.Pro)
+> head(df)
+      Label  Phe Pro Ser Thr ADMA alpha.AAA c4.OH.Pro Carnosine Creatinine  DOPA Dopamine Histamine Kynurenine Met.SO
+1 Alzheimer 72.8 166  NA  NA   NA     0.760     0.236     1.270       49.9 0.265    0.233     0.225         NA  0.526
+2 Alzheimer 93.4 138  NA  NA   NA     0.929     0.189     1.350       48.8 0.252       NA     0.211         NA  0.387
+3 Alzheimer 68.6 161  NA  NA   NA     0.620     0.198     0.998       30.4 0.268       NA     0.217         NA  0.651
+4 Alzheimer 94.1 129  NA  NA   NA     0.795        NA     0.675       80.1 0.264    0.234     0.209         NA  0.389
+5 Alzheimer 79.8 126  NA  NA   NA     1.360        NA     1.280       60.5 0.271    0.231     0.210         NA  0.466
+  Nitro.Tyr PEA Putrescine Sarcosine Serotonin Spermidine Spermine t4.OH.Pro Taurine SDMA C0 C10 C10.1 C10.2   C12
+1     0.027  NA         NA      17.8     0.147      0.188       NA        NA     125 1.13 NA  NA 0.312 0.038 0.030
+2        NA  NA         NA      20.2     0.231      0.233       NA        NA     120 1.65 NA  NA 0.288 0.039 0.038
+3        NA  NA         NA      14.4     0.196      0.384       NA        NA     139 1.57 NA  NA 0.357 0.054 0.032
+4        NA  NA         NA      18.7     0.255      0.353       NA        NA     159 1.34 NA  NA 0.317 0.040 0.045
+5        NA  NA         NA      22.5     0.390      0.473       NA        NA     149 1.24 NA  NA 0.472 0.074 0.056
+  C12.DC C12.1   C14 C14.1 C14.1.OH C14.2 C14.2.OH   C16 C16.OH C16.1 C16.1.OH C16.2 C16.2.OH C18 C18.1 C18.1.OH
+1  0.042 0.290 0.023 0.019    0.008 0.008    0.006 0.046     NA 0.009    0.007 0.005    0.013  NA 0.024    0.003
+2  0.038 0.265 0.026 0.017    0.008 0.009    0.009 0.070     NA 0.013    0.006 0.006    0.012  NA 0.025    0.003
+3  0.048 0.302 0.021 0.031    0.010 0.010    0.009 0.076     NA 0.019    0.010 0.005    0.013  NA 0.025       NA
+4  0.048 0.275 0.026 0.028    0.010 0.013    0.011 0.074     NA 0.015    0.008 0.006    0.009  NA 0.035    0.004
+5  0.079 0.394 0.034 0.043    0.016 0.025    0.017 0.062     NA 0.024    0.014 0.012    0.025  NA 0.034    0.012
+  C18.2 C2 C3 C3.OH  C3.1    C4 C3.DC..C4.OH. C4.1    C5 C5.M.DC C5.OH..C3.DC.M. C5.1 C5.1.DC C6..C4.1.DC.
+1 0.016 NA NA 0.008 0.015 0.082            NA   NA 0.094      NA           0.026   NA   0.020        0.022
+2 0.028 NA NA 0.009 0.013 0.108            NA   NA 0.077      NA           0.026   NA   0.021        0.030
+3 0.018 NA NA    NA 0.012 0.057            NA   NA 0.096      NA           0.024   NA   0.018        0.022
+4 0.033 NA NA 0.010 0.017 0.110            NA   NA 0.145      NA           0.041   NA   0.016        0.029
+5 0.017 NA NA 0.029 0.035 0.106            NA   NA 0.141      NA           0.058   NA   0.049        0.052
+  C5.DC..C6.OH.  C6.1 C7.DC C8    C9 lysoPC.a.C14.0 lysoPC.a.C16.0 lysoPC.a.C16.1 lysoPC.a.C17.0 lysoPC.a.C18.0
+1         0.014 0.018    NA NA 0.016           2.23           37.9           2.66             NA           9.00
+2         0.018 0.015    NA NA 0.014           1.97           22.1           1.31             NA           5.35
+3         0.029 0.031    NA NA 0.017           2.12           33.7           2.53             NA           7.51
+4         0.016 0.027    NA NA 0.018           2.19           32.8           2.39             NA           7.21
+5         0.040 0.040    NA NA 0.041           1.88           24.5           1.27             NA           6.66
+  lysoPC.a.C18.1 lysoPC.a.C18.2 lysoPC.a.C20.3 lysoPC.a.C20.4 lysoPC.a.C24.0 lysoPC.a.C26.0 lysoPC.a.C26.1
+1           8.58           7.27             NA             NA             NA          0.113          0.053
+2           3.94           4.42             NA             NA             NA          0.066          0.042
+3           7.73           8.02             NA             NA             NA          0.126          0.049
+4           7.22           7.62             NA             NA             NA          0.086          0.045
+5           5.39           3.60             NA             NA             NA          0.118          0.053
+  lysoPC.a.C28.0 lysoPC.a.C28.1 PC.aa.C24.0 PC.aa.C26.0 PC.aa.C28.1 PC.aa.C30.0 PC.aa.C32.0 PC.aa.C32.1 PC.aa.C32.2
+1          0.108          0.072       0.082       0.438       0.571          NA        11.4        9.22          NA
+2          0.076          0.058       0.065       0.409       0.521          NA        12.7        5.40          NA
+3          0.078          0.092       0.099       0.458       0.605          NA        16.6       11.60          NA
+4          0.076          0.076       0.076       0.486       0.685          NA        18.6       13.30          NA
+5          0.092          0.072       0.069       0.401       0.513          NA        13.8        5.03          NA
+  PC.aa.C32.3 PC.aa.C34.1 PC.aa.C34.2 PC.aa.C34.3 PC.aa.C34.4 PC.aa.C36.0 PC.aa.C36.1 PC.aa.C36.2 PC.aa.C36.3
+1          NA       109.0        71.0       1.430       0.200          NA        21.7        42.4          NA
+2          NA        64.2        60.5       0.879       0.127          NA        14.3        35.6          NA
+3          NA       108.0        83.1       1.930       0.210          NA        19.9        44.9          NA
+4          NA       106.0        93.6       1.590       0.190          NA        20.9        48.8          NA
+5          NA        83.4        35.9       0.709       0.135          NA        20.5        28.5          NA
+  PC.aa.C36.4 PC.aa.C36.5 PC.aa.C36.6 PC.aa.C38.0 PC.aa.C38.3 PC.aa.C38.4 PC.aa.C38.5 PC.aa.C38.6 PC.aa.C40.1
+1          NA        1.86       0.084       1.230        32.1        95.1       16.80        41.6       0.195
+2          NA        1.05       0.046       0.946        21.9        78.9        9.91        25.1       0.211
+3          NA        2.09       0.057       1.210        34.5       107.0       17.50        36.6       0.212
+4          NA        1.76       0.070       1.160        28.7        92.7       14.30        29.9       0.220
+5          NA        1.70       0.048       1.100        23.3       101.0       13.80        36.2       0.165
+  PC.aa.C40.2 PC.aa.C40.3 PC.aa.C40.4 PC.aa.C40.5 PC.aa.C40.6 PC.aa.C42.0 PC.aa.C42.1 PC.aa.C42.2 PC.aa.C42.4
+1       0.074       0.491        3.48          NA        21.8       0.364       0.226       0.108          NA
+2       0.057       0.358        3.39          NA        14.2       0.419       0.216       0.109          NA
+3       0.118       0.395        3.56          NA        16.7       0.476       0.281       0.118          NA
+4       0.097       0.433        3.59          NA        14.0       0.427       0.223       0.119          NA
+5       0.044       0.525        3.37          NA        22.5       0.125       0.095       0.083          NA
+  PC.aa.C42.5 PC.aa.C42.6 PC.ae.C30.0 PC.ae.C30.1 PC.ae.C30.2 PC.ae.C32.1 PC.ae.C32.2 PC.ae.C34.0 PC.ae.C34.1
+1       0.272       0.291       0.173          NA          NA        1.65       0.371       0.880          NA
+2       0.317       0.248       0.147          NA          NA        2.01       0.360       0.763          NA
+3       0.206       0.267       0.209          NA          NA        2.40       0.477       0.938          NA
+4       0.267       0.254       0.223          NA          NA        2.47       0.459       0.964          NA
+5       0.205       0.280       0.095          NA          NA        1.72       0.316       1.060          NA
+  PC.ae.C34.2 PC.ae.C34.3 PC.ae.C36.0 PC.ae.C36.1 PC.ae.C36.2 PC.ae.C36.3 PC.ae.C36.4 PC.ae.C36.5 PC.ae.C38.0
+1          NA       0.813          NA        5.64          NA       1.170        6.96        4.79       0.474
+2          NA       0.905          NA        3.89          NA       0.873        6.40        5.36       0.325
+3          NA       1.030          NA        5.95          NA       1.240        9.05        6.63       0.478
+4          NA       1.020          NA        4.75          NA       1.350        8.36        5.97       0.397
+5          NA       0.722          NA        5.95          NA       0.760        4.78        4.00       0.430
+  PC.ae.C38.1 PC.ae.C38.2 PC.ae.C38.3 PC.ae.C38.4 PC.ae.C38.5 PC.ae.C38.6 PC.ae.C40.1 PC.ae.C40.2 PC.ae.C40.3
+1          NA          NA        2.66        6.33        5.51        1.95          NA       0.575       0.940
+2          NA          NA        1.80        5.37        4.49        1.63          NA       0.491       0.702
+3          NA          NA        2.87        7.06        5.64        1.98          NA       0.654       0.817
+4          NA          NA        1.97        5.99        5.63        1.97          NA       0.540       0.742
+5          NA          NA        1.80        5.45        4.34        1.51          NA       0.432       0.632
+  PC.ae.C40.4 PC.ae.C40.5 PC.ae.C40.6 PC.ae.C42.0 PC.ae.C42.1 PC.ae.C42.2 PC.ae.C42.3 PC.ae.C42.4 PC.ae.C42.5
+1        1.76          NA          NA          NA       0.316       0.192       0.277       0.264       0.888
+2        1.43          NA          NA          NA       0.260       0.157       0.200       0.311       0.840
+3        1.51          NA          NA          NA       0.356       0.241       0.288       0.319       0.957
+4        1.45          NA          NA          NA       0.299       0.159       0.208       0.392       0.863
+5        1.10          NA          NA          NA       0.355       0.138       0.174       0.162       0.513
+  PC.ae.C44.3 PC.ae.C44.4 PC.ae.C44.5 PC.ae.C44.6 SM..OH..C14.1 SM..OH..C16.1 SM..OH..C22.1 SM..OH..C22.2
+1       0.065       0.168          NA       0.494         1.420            NA            NA          1.86
+2       0.071       0.220          NA       0.515         1.390            NA            NA          2.20
+3       0.065       0.228          NA       0.603         1.840            NA            NA          2.63
+4       0.069       0.237          NA       0.611         1.720            NA            NA          2.84
+5       0.081       0.154          NA       0.134         0.987            NA            NA          1.74
+  SM..OH..C24.1 SM.C16.0 SM.C16.1 SM.C18.0 SM.C18.1 SM.C20.2 SM.C24.0 SM.C24.1 SM.C26.0 SM.C26.1 H1_1   H1 Urea_N
+1         0.597     44.9     7.99       NA    10.40    0.290       NA       NA    0.147    0.337 3356 3356     NA
+2         0.640     42.1     6.88       NA     8.52    0.211       NA       NA    0.130    0.317 2509 2509  201.9
+3         0.665     44.8     8.91       NA    11.60    0.304       NA       NA    0.163    0.364 2661 2661  193.3
+4         0.682     52.4     8.61       NA    11.50    0.261       NA       NA    0.138    0.353 2652 2652  500.8
+5         0.478     40.6     5.86       NA     8.34    0.196       NA       NA    0.111    0.283 2258 2258  132.5
+  L.Arginine_N L.Leucine_N EDTAca_N X2.Hydroxybutyrate X3.Hydroxybutyrate Acetate Acetoacetate Acetone Betaine
+1           NA          NA       NA                 NA                 NA      NA           NA      NA      NA
+2         22.5        35.3      2.0              12.40                8.5    13.2           NA     5.1    22.0
+3         21.0        25.4      1.8              11.33               11.7     5.8           NA     5.6    19.1
+4         16.0        27.1      2.5              12.70                7.2     9.8           NA     4.0    13.9
+5         13.2        57.9      2.5              35.20               44.7    20.2           NA    18.9    33.9
+  Carnitine Choline Creatine Dimethyl.sulfone Ethanol Formate Glucose Glycerol Hypoxanthine Isobutyrate Isopropanol
+1        NA      NA       NA               NA      NA      NA      NA       NA           NA          NA          NA
+2       8.7    14.2       NA              4.7    16.6    24.6      NA       NA          6.3         3.6         1.9
+3      15.3    14.5       NA              2.1     8.1    27.4      NA       NA          6.0         2.5         2.5
+4       7.7    11.8       NA              1.3     6.4    14.4      NA       NA          8.6         2.5         4.4
+5      18.5    27.7       NA              5.5    13.0    40.0      NA       NA          0.0         6.1        11.2
+  Lactate Malonate
+1      NA       NA
+2      NA       NA
+3      NA       NA
+4      NA       NA
+5      NA       NA
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
